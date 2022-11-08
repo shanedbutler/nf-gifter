@@ -17,14 +17,15 @@ namespace Gifter.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_postRepository.GetAllWithComments());
+            return Ok(_postRepository.GetAll());
         }
 
-        //[HttpGet]
-        //public IActionResult GetWithComments()
-        //{
-        //    return Ok(_postRepository.GetAllWithComments());
-        //}
+        [HttpGet("GetWithComments")]
+        public IActionResult GetWithComments()
+        {
+            var posts = _postRepository.GetAllWithComments();
+            return Ok(posts);
+        }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
