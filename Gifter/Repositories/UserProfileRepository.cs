@@ -1,7 +1,6 @@
 ﻿using Gifter.Models;
 using Gifter.Utils;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 
 namespace Gifter.Repositories
