@@ -9,6 +9,7 @@ namespace Gifter.Models
 
         [Required]
         public string Name { get; set; }
+        public string Bio { get; set; }
 
         [Required]
         public string Email { get; set; }
