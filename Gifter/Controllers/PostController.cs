@@ -20,6 +20,12 @@ namespace Gifter.Controllers
             return Ok(_postRepository.GetAll());
         }
 
+        [HttpGet]
+        public IActionResult GetWithComments()
+        {
+            return Ok(_postRepository.GetAllWithComments());
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
