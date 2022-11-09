@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Gifter.Repositories;
 using Gifter.Models;
+using System;
 
 namespace Gifter.Controllers
 {
@@ -47,6 +48,18 @@ namespace Gifter.Controllers
                 return NotFound();
             }
             return Ok(post);
+        }
+
+        [HttpGet("search")]
+        public IActionResult Search(string q, bool sortDesc)
+        {
+            return Ok(_postRepository.Search(q, sortDesc));
+        }
+
+        [HttpGet("latest")]
+        public IActionResult Latest(DateTime d, bool sortDesc)
+        {
+            return Ok(_postRepository.Latest(d, sortDesc));
         }
 
         [HttpPost]
