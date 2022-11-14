@@ -3,10 +3,11 @@ import React from "react";
 const baseUrl = '/api/post';
 
 export const getAllPosts = () => {
-  return fetch(baseUrl)
+  return fetch(`${baseUrl}/GetWithComments`)
     .then((res) => res.json())
 };
 
+//api/Post/search?q=<query>
 export const getBySearch = (query) => {
   return fetch(`${baseUrl}/search/?q=${query}`)
   .then((res) => res.json())

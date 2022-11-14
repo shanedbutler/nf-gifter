@@ -11,6 +11,7 @@ const Post = ({ post }) => {
           <strong>{post.title}</strong>
         </p>
         <p>{post.caption}</p>
+        {post.comments.map(comment => <li key={comment.id}>{comment.message}</li>)}
       </CardBody>
     </Card>
   );
