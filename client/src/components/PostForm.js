@@ -29,6 +29,7 @@ export const PostForm = () => {
         <label htmlFor="url">URL:</label>
         <input property="url" onChange={e => setUrl(e.target.value)} /><br/>
         <button onClick={handleClick}>Submit</button>
+        <br/>
     </>
     );
 };

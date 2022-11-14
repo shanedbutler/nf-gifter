@@ -7,6 +7,11 @@ export const getAllPosts = () => {
     .then((res) => res.json())
 };
 
+export const getBySearch = (query) => {
+  return fetch(`${baseUrl}/search/?q=${query}`)
+  .then((res) => res.json())
+};
+
 export const addPost = (singlePost) => {
   return fetch(baseUrl, {
     method: "POST",
