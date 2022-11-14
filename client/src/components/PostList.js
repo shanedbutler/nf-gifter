@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Post from './Post';
-import { getAllPosts, getBySearch, searchPost } from "../modules/PostManager";
+import { getAllPosts, getBySearch } from "../modules/PostManager";
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
