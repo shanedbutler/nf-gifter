@@ -1,7 +1,11 @@
 import React, { useState } from "react"
 import { addPost } from "../modules/PostManager";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 export const PostForm = () => {
+
+    const navigate = useNavigate();
 
     const [title, setTitle] = useState("");
     const [caption, setCaption] = useState("");
@@ -16,7 +20,11 @@ export const PostForm = () => {
     };
 
     const handleClick = () => {
-        addPost(post);
+        addPost(post)
+        .then((p) => {
+            // Navigate back to the home route
+            navigate("/");
+        });
     }
     
     return (
