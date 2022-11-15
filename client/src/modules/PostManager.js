@@ -16,6 +16,8 @@ export const getPost = (id) => {
   return fetch(`${baseUrl}/GetWithComments/${id}`).then((res) => res.json());
 };
 
+// TODO: ADD getPostByUserId + repo and actions in backend
+
 export const addPost = (singlePost) => {
   return fetch(baseUrl, {
     method: "POST",
