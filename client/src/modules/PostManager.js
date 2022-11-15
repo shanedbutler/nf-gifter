@@ -1,5 +1,3 @@
-import React from "react";
-
 const baseUrl = '/api/post';
 
 export const getAllPosts = () => {
@@ -7,10 +5,15 @@ export const getAllPosts = () => {
     .then((res) => res.json())
 };
 
-//api/Post/search?q=<query>
+// api/Post/search?q=<query>
 export const getBySearch = (query) => {
   return fetch(`${baseUrl}/search/?q=${query}`)
   .then((res) => res.json())
+};
+
+// api/Post/GetWithComments/<id>
+export const getPost = (id) => {
+  return fetch(`${baseUrl}/GetWithComments/${id}`).then((res) => res.json());
 };
 
 export const addPost = (singlePost) => {
