@@ -23,6 +23,18 @@ namespace Gifter.Controllers
             return Ok(_userProfileRepository.GetAll());
         }
 
+        // GET: api/<UserProfileController>/GetByEmail
+        [HttpGet("GetByEmail")]
+        public IActionResult GetByEmail(string email)
+        {
+            var user = _userProfileRepository.GetByEmail(email);
+            if (email == null || user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
         // GET api/<UserProfileController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -51,7 +63,7 @@ namespace Gifter.Controllers
         public IActionResult Post(UserProfile profile)
         {
             _userProfileRepository.Add(profile);
-            return CreatedAtAction("Get", new { id = profile.Id }, profile);
+            return CreatedAtAction("GetByEmail", new { email = profile.Email }, profile);
         }
 
         // PUT api/<UserProfileController>/5

@@ -2,6 +2,7 @@
 using Gifter.Utils;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
+using System;
 
 namespace Gifter.Repositories
 {
@@ -40,6 +41,39 @@ namespace Gifter.Repositories
                     reader.Close();
 
                     return profiles;
+                }
+            }
+        }
+
+        public UserProfile GetByEmail(string email)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                          SELECT Id, Name, Email, ImageUrl, Bio, DateCreated FROM UserProfile WHERE Email = @email";
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    var reader = cmd.ExecuteReader();
+
+                    UserProfile user = null;
+                    if (reader.Read())
+                    {
+                        user = new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "iD"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl")
+                        };
+                    }
+
+                    reader.Close();
+
+                    return user;
                 }
             }
         }
@@ -152,7 +186,7 @@ namespace Gifter.Repositories
                     DbUtils.AddParameter(cmd, "@Name", profile.Name);
                     DbUtils.AddParameter(cmd, "@Bio", profile.Bio);
                     DbUtils.AddParameter(cmd, "@Email", profile.Email);
-                    DbUtils.AddParameter(cmd, "@DateCreated", profile.DateCreated);
+                    DbUtils.AddParameter(cmd, "@DateCreated", DateTime.Now);
                     DbUtils.AddParameter(cmd, "@ImageUrl", profile.ImageUrl);
 
                     profile.Id = (int)cmd.ExecuteScalar();

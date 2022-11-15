@@ -8,6 +8,7 @@ namespace Gifter.Repositories
         void Add(UserProfile profile);
         void Delete(int id);
         List<UserProfile> GetAll();
+        UserProfile GetByEmail(string email);
         UserProfile GetById(int id);
         UserProfile GetByIdWithPosts(int id);
         void Update(UserProfile profile);
