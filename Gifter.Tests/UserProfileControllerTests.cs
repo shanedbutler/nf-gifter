@@ -31,6 +31,43 @@ namespace Gifter.Tests
             Assert.Equal(users, actualUsers);
         }
 
+        [Fact]
+        public void Get_By_Id_Returns_NotFound_When_Given_Unknown_Id()
+        {
+            // Arrange
+            var users = new List<UserProfile>();
+
+            var repo = new InMemoryUserProfileRepository(users);
+            var controller = new UserProfileController(repo);
+
+            // Act
+            var result = controller.Get(1);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void Get_By_Id_Returns_UserProfile_With_Given_Id()
+        {
+            // Arrange
+            var testUserId = 99;
+            var users = CreateTestUsers(5);
+            users[0].Id = testUserId;
+
+            var repo = new InMemoryUserProfileRepository(users);
+            var controller = new UserProfileController(repo);
+
+            // Act
+            var result = controller.Get(testUserId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var actualPost = Assert.IsType<UserProfile>(okResult.Value);
+
+            Assert.Equal(testUserId, actualPost.Id);
+        }
+
         private List<UserProfile> CreateTestUsers(int count)
         {
             var users = new List<UserProfile>();
